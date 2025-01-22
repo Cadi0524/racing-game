@@ -13,8 +13,6 @@ public class FlightController : MonoBehaviour
    public float leftGas = 100;
    public TextMeshProUGUI leftGastext;
 
-
-   
    
    [SerializeField] private float direction;
 
@@ -32,6 +30,10 @@ public class FlightController : MonoBehaviour
       {
          rb.velocity = new Vector2(moveInput.x * direction, moveInput.y * direction);
          
+      }
+      else
+      {
+         rb.velocity = new Vector2(0, 0);
       }
    }
 
@@ -63,20 +65,14 @@ public class FlightController : MonoBehaviour
    public void GasUpdate()
    {
       leftGastext.text = leftGas.ToString();
-      leftGas -= 10* Time.deltaTime;
+      leftGas -= 9* Time.deltaTime;
       leftGas = Mathf.Clamp(leftGas, 0, 200);
       if (leftGas <= 0)
       {
+         GameManager.Instance.iswork = false;
          UIManager.Instance.GameOverPanel();
+         leftGas = 100;
       }
 
    }
-
-
-   void GameOver()
-   {
-      UIManager.Instance.GameOverPanel();
-      
-   }
-   
 }

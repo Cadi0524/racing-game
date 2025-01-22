@@ -22,9 +22,13 @@ public class InputController : MonoBehaviour
    void Update()
    {
        moveInput = playerInput.actions["Move"].ReadValue<Vector2>();
-      _flightController.Move(moveInput);
-      _flightController.GasUpdate();
-      _flightController.RestrictFlight();
+       if (GameManager.Instance.iswork)
+       {
+           _flightController.Move(moveInput);
+           _flightController.GasUpdate();
+           _flightController.RestrictFlight();
+       }
+    
    }
    
    
